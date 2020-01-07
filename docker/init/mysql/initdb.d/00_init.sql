@@ -1,0 +1,3 @@
+CREATE DATABASE IF NOT EXISTS ala CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE USER 'ala'@'%' IDENTIFIED BY 'dev';
+GRANT ALL ON *.* TO 'ala'@'%';

@@ -1,0 +1,568 @@
+#List all words: GET /word
+curl --request GET \
+  --url http://localhost/api/word
+
+#Get single word: GET /word/{id}
+curl --request GET \
+  --url http://localhost/api/word/6
+
+#Delete word: DELETE /word/{id}
+curl --request DELETE \
+  --url http://localhost/api/word/51
+
+#Get all word types: GET /word/type
+curl --request GET \
+  --url http://localhost/api/word/type
+
+#Bulk delete words: DELETE /word/bulk/remove
+curl --request DELETE \
+  --url http://localhost/api/word/bulk/remove \
+  --header 'content-type: application/json' \
+  --data '{
+	"ids" : [1, 2, 3]
+}'
+
+#Word autocomplete
+curl --request GET \
+  --url 'http://localhost/api/word/autocomplete?input=a&limit='
+
+#get adjectiveTypePattern
+curl -X GET http://localhost/api/word/adjectiveTypePattern
+  
+#get nounAttribution
+curl -X GET http://localhost/api/word/nounAttribution
+
+#get nounClassPlural
+curl -X GET http://localhost/api/word/nounClassPlural
+
+#get nounClassPlural
+curl -X GET http://localhost/api/word/nounClassPlural
+
+#get nounSex
+curl -X GET http://localhost/api/word/nounSex
+
+#get nounSexHow
+curl -X GET http://localhost/api/word/nounSexHow 
+
+#get nounType
+curl -X GET http://localhost/api/word/nounType
+
+#get verbPhonologicalRule
+curl -X GET http://localhost/api/word/verbPhonologicalRule
+
+#get verbSyntaxicalRule
+curl -X GET http://localhost/api/word/verbSyntaxicalRule
+
+#get word options
+curl -X GET http://localhost/api/word/options
+
+
+#################
+#Insert new word#
+#################
+
+#Infinitive
+
+curl -X POST \
+  http://localhost/api/word 
+  -d '{
+    "text": "adipisci",
+    "root": {
+        "id": 22
+    },
+    "type": {
+        "id": 4
+    },
+    "adjective": null,
+    "noun": null,
+    "verb": null,
+    "infinitive": {
+        "verb": "tenetur",
+        "hayaah": "ex",
+        "meme": "recusandae",
+        "making": "et",
+        "infTime": "saepe",
+        "pattern": {
+            "id": 18
+        },
+        "patternHayaah": {
+            "id": 2
+        },
+        "patternMeme": {
+            "id": 15
+        },
+        "patternMaking": {
+            "id": 16
+        },
+        "patternTime": {
+            "id": 11
+        }
+    }
+}'
+
+#Response
+{
+    "id": 1012,
+    "text": "adipisci",
+    "root": {
+        "id": 22,
+        "root": "cumque",
+        "createdAt": "2019-05-17T21:46:04+00:00",
+        "updatedAt": "2019-05-17T21:46:04+00:00",
+        "pattern": {
+            "id": 6,
+            "text": "tenetur"
+        },
+        "rootClass": {
+            "id": 8,
+            "class": "omnis"
+        }
+    },
+    "type": {
+        "id": 4,
+        "code": "infi",
+        "name": "Infinitive"
+    },
+    "createdAt": "2019-05-18T17:48:54+00:00",
+    "updatedAt": "2019-05-18T17:48:54+00:00",
+    "adjective": null,
+    "noun": null,
+    "verb": null,
+    "infinitive": {
+        "id": 267,
+        "verb": "tenetur",
+        "hayaah": "ex",
+        "meme": "recusandae",
+        "making": "et",
+        "infTime": "saepe",
+        "createdAt": "2019-05-18T17:48:54+00:00",
+        "updatedAt": "2019-05-18T17:48:54+00:00",
+        "pattern": {
+            "id": 18,
+            "text": "aut"
+        },
+        "patternHayaah": {
+            "id": 2,
+            "text": "a"
+        },
+        "patternMeme": {
+            "id": 15,
+            "text": "sed"
+        },
+        "patternMaking": {
+            "id": 16,
+            "text": "natus"
+        },
+        "patternTime": {
+            "id": 11,
+            "text": "aperiam"
+        }
+    }
+}
+
+#Verb
+curl -X POST \
+  http://localhost/api/word \
+  -d '{
+    "text": "minima",
+    "root": {
+        "id": 14,
+        "pattern": {
+            "id": 10
+        },
+        "rootClass": {
+            "id": 5
+        }
+    },
+    "type": {
+        "id": 2
+    },
+    "adjective": null,
+    "noun": null,
+    "verb": {
+        "pattern": {
+            "id": 3
+        },
+        "verbPhonologicalRule": {
+            "id": 18
+        },
+        "verbSyntaxicalRule": {
+            "id": 7
+        }
+    },
+    "infinitive": null
+}'
+
+#Response
+{
+    "id": 1014,
+    "text": "minima",
+    "root": {
+        "id": 14,
+        "root": "omnis",
+        "createdAt": "2019-05-17T21:46:04+00:00",
+        "updatedAt": "2019-05-17T21:46:04+00:00",
+        "pattern": {
+            "id": 10,
+            "text": "suscipit"
+        },
+        "rootClass": {
+            "id": 2,
+            "class": "quisquam"
+        }
+    },
+    "type": {
+        "id": 2,
+        "code": "verb",
+        "name": "Verb"
+    },
+    "createdAt": "2019-05-18T17:50:34+00:00",
+    "updatedAt": "2019-05-18T17:50:34+00:00",
+    "adjective": null,
+    "noun": null,
+    "verb": {
+        "id": 238,
+        "createdAt": "2019-05-18T17:50:34+00:00",
+        "updatedAt": "2019-05-18T17:50:34+00:00",
+        "pattern": {
+            "id": 3,
+            "text": "et"
+        },
+        "verbPhonologicalRule": {
+            "id": 18,
+            "text": "illo",
+            "alaId": "VerbPhonologicalRule_523"
+        },
+        "verbSyntaxicalRule": {
+            "id": 7,
+            "text": "repellat",
+            "alaId": "VerbSyntaxicalRule_487"
+        }
+    },
+    "infinitive": null
+}
+
+#adjective
+curl -X POST \
+  http://localhost/api/word \
+  -d '{
+    "text": "error",
+    "root": {
+        "id": 20,
+        "pattern": {
+            "id": 6
+        },
+        "rootClass": {
+            "id": 7
+        }
+    },
+    "type": {
+        "id": 3
+    },
+    "adjective": {
+        
+        "pastParticiple": "quo",
+        "assimilated": "autem",
+        "mobalagha": "eius",
+        "comperative": "velit",
+        "periodParticiple": "ipsam",
+        "placeParticiple": "quaerat",
+        "machineParticiple": "expedita",
+        "verb": "vitae",
+        "adjectivePattern": {
+            "id": 5
+        },
+        "typePattern": {
+            "id": 16
+        },
+        "patternPastParticiple": {
+            "id": 4
+        },
+        "patternAssimilated": {
+            "id": 10
+        },
+        "patternMobalagha": {
+            "id": 15
+        },
+        "patternComperative": {
+            "id": 2
+        },
+        "patternPeriodParticiple": {
+            "id": 13
+        },
+        "patternPlaceParticiple": {
+            "id": 10
+        },
+        "patternMachineParticiple": {
+            "id": 12
+        },
+        "patternVerb": {
+            "id": 8
+        }
+    },
+    "noun": null,
+    "verb": null,
+    "infinitive": null
+}'
+
+#response
+{
+    "id": 1015,
+    "text": "error",
+    "root": {
+        "id": 20,
+        "root": "consequatur",
+        "createdAt": "2019-05-17T21:46:04+00:00",
+        "updatedAt": "2019-05-17T21:46:04+00:00",
+        "pattern": {
+            "id": 4,
+            "text": "et"
+        },
+        "rootClass": {
+            "id": 1,
+            "class": "dolorem"
+        }
+    },
+    "type": {
+        "id": 3,
+        "code": "adje",
+        "name": "Adjective"
+    },
+    "createdAt": "2019-05-18T17:51:07+00:00",
+    "updatedAt": "2019-05-18T17:51:07+00:00",
+    "adjective": {
+        "id": 250,
+        "pastParticiple": "quo",
+        "assimilated": "autem",
+        "mobalagha": "eius",
+        "comperative": "velit",
+        "periodParticiple": "ipsam",
+        "placeParticiple": "quaerat",
+        "machineParticiple": "expedita",
+        "verb": "vitae",
+        "createdAt": "2019-05-18T17:51:07+00:00",
+        "updatedAt": "2019-05-18T17:51:07+00:00",
+        "adjectivePattern": {
+            "id": 5,
+            "text": "ut"
+        },
+        "typePattern": {
+            "id": 16,
+            "text": "magni",
+            "alaId": "AdjectiveTypePattern_619"
+        },
+        "patternPastParticiple": {
+            "id": 4,
+            "text": "et"
+        },
+        "patternAssimilated": {
+            "id": 10,
+            "text": "suscipit"
+        },
+        "patternMobalagha": {
+            "id": 15,
+            "text": "sed"
+        },
+        "patternComperative": {
+            "id": 2,
+            "text": "a"
+        },
+        "patternPeriodParticiple": {
+            "id": 13,
+            "text": "fuga"
+        },
+        "patternPlaceParticiple": {
+            "id": 10,
+            "text": "suscipit"
+        },
+        "patternMachineParticiple": {
+            "id": 12,
+            "text": "et"
+        },
+        "patternVerb": {
+            "id": 8,
+            "text": "omnis"
+        }
+    },
+    "noun": null,
+    "verb": null,
+    "infinitive": null
+}
+
+#Noun
+curl -X POST \
+  http://localhost/api/word \
+  -d '{
+    "text": "magni",
+    "root": {
+        "id": 26,
+        "pattern": {
+            "id": 7
+        },
+        "rootClass": {
+            "id": 9
+        }
+    },
+    "type": {
+        "id": 1
+    },
+
+    "adjective": null,
+    "noun": {
+        "plural": "consequatur",
+        "theWithNoun": "et",
+        "dualMale": "dolores",
+        "dualFemale": "qui",
+        "pattern": {
+            "id": 2
+        },
+        "type": {
+            "id": 14
+        },
+        "classPlural": {
+            "id": 4
+        },
+        "sex": {
+            "id": 5
+        },
+        "sexHow": {
+            "id": 7
+        },
+        "attribution": {
+            "id": 14
+        },
+        "minimize": {
+            "id": 11
+        }
+    },
+    "verb": null,
+    "infinitive": null
+}'
+
+#Response
+{
+    "id": 1017,
+    "text": "magni",
+    "root": {
+        "id": 26,
+        "root": "sed",
+        "createdAt": "2019-05-17T21:46:04+00:00",
+        "updatedAt": "2019-05-17T21:46:04+00:00",
+        "pattern": {
+            "id": 7,
+            "text": "id"
+        },
+        "rootClass": {
+            "id": 10,
+            "class": "quia"
+        }
+    },
+    "type": {
+        "id": 1,
+        "code": "noun",
+        "name": "Noun"
+    },
+    "createdAt": "2019-05-18T17:52:02+00:00",
+    "updatedAt": "2019-05-18T17:52:02+00:00",
+    "adjective": null,
+    "noun": {
+        "id": 259,
+        "plural": "consequatur",
+        "theWithNoun": "et",
+        "dualMale": "dolores",
+        "dualFemale": "qui",
+        "createdAt": "2019-05-18T17:52:02+00:00",
+        "updatedAt": "2019-05-18T17:52:02+00:00",
+        "pattern": {
+            "id": 2,
+            "text": "a"
+        },
+        "type": {
+            "id": 14,
+            "text": "velit",
+            "alaId": "NounType_273"
+        },
+        "classPlural": {
+            "id": 4,
+            "text": "perferendis",
+            "alaId": "NounClassPlural_784"
+        },
+        "sex": {
+            "id": 5,
+            "text": "quam",
+            "alaId": "NounSex_557"
+        },
+        "sexHow": {
+            "id": 7,
+            "text": "molestiae",
+            "alaId": "NounSexHow_225"
+        },
+        "attribution": {
+            "id": 14,
+            "text": "harum",
+            "alaId": "NounAttribution_518"
+        },
+        "minimize": {
+            "id": 11,
+            "text": "ut",
+            "alaId": "NounMinimize_125"
+        }
+    },
+    "verb": null,
+    "infinitive": null
+}
+
+#############
+#Update Word#
+#############
+
+#check the JSON for request in insert word! JSONs are the same for inserting and updating.
+#Only the request type and URL is different.
+
+curl -X PUT \
+  http://localhost/api/word/{wordId} \
+  -H 'Content-Type: application/json' \
+  -H 'Postman-Token: b8c7cb4b-c83c-4ad3-b706-52d93ac8a3a0' \
+  -H 'cache-control: no-cache' \
+  -d '{
+    "text": "magni",
+    "root": {
+        "id": 26
+    },
+    "type": {
+        "id": 1
+    },
+
+    "adjective": null,
+    "noun": {
+        "plural": "consequatur",
+        "theWithNoun": "et",
+        "dualMale": "dolores",
+        "dualFemale": "qui",
+        "pattern": {
+            "id": 2
+        },
+        "type": {
+            "id": 14
+        },
+        "classPlural": {
+            "id": 4
+        },
+        "sex": {
+            "id": 5
+        },
+        "sexHow": {
+            "id": 7
+        },
+        "attribution": {
+            "id": 14
+        },
+        "minimize": {
+            "id": 11
+        }
+    },
+    "verb": null,
+    "infinitive": null
+}'
+
+#Same response as for insert word! So check the JSONs there

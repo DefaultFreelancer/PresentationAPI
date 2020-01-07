@@ -1,0 +1,22 @@
+#authenticate
+curl -X POST \
+  http://localhost/api/auth/login \
+  -d '{
+    "username": "kelton.carroll@jones.info",
+    "password": "dev"
+}'
+
+#get auth
+curl -X GET \
+  http://localhost/api/auth
+
+#get user
+curl -X GET \
+  http://localhost/api/auth/user
+
+#extend session
+curl -X POST \
+    http://localhost/api/auth/extend \
+    --data '{
+	"user-id": "{id}"
+    }'

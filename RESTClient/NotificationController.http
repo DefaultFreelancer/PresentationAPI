@@ -1,0 +1,21 @@
+#Get user Notifications: GET /notification
+curl --request POST \
+  --url http://localhost/api/notification \
+  --header 'content-type: application/json' \
+  --data '{
+	'limit' : 20,
+    'moment': 2004-02-12T15:19:21.0002
+    'past'  : true | false
+}'
+
+#Seen user Notification: PATCH /notification/{id}
+curl --request PATCH \
+  --url http://localhost/api/notification/{id} \
+  --header 'content-type: application/json'
+
+
+
+#Delete user Notification: DELETE /notification/{id}
+curl --request DELETE \
+  --url http://localhost/api/notification/{id} \
+  --header 'content-type: application/json' \

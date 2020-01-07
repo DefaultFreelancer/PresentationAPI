@@ -1,0 +1,35 @@
+#Get all idioms: GET /idiom
+curl --request GET \
+  --url http://localhost/api/idiom
+
+#Get one idiom: GET /idiom/{id}
+curl --request GET \
+  --url http://localhost/api/idiom/4
+
+#Create idiom: POST /idiom
+curl --request POST \
+  --url http://localhost/api/idiom \
+  --header 'content-type: application/json' \
+  --data '{
+	"text": "test",
+	"root": {"id": 4},
+	"word": {"id": 4}
+}'
+
+#Update idiom: PUT /idiom/{id}
+curl --request PUT \
+  --url http://localhost/api/idiom/52 \
+  --header 'content-type: application/json' \
+  --data '{
+	"text": "test2",
+	"root": {"id": 5},
+	"word": {"id": 5}
+}'
+
+#Delete idiom: DELETE /idiom/{id}
+curl --request DELETE \
+  --url http://localhost/api/idiom/51
+
+#Idiom autocomplete
+curl --request GET \
+  --url 'http://localhost/api/idiom/autocomplete?input=a&limit=5'

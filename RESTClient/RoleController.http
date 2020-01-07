@@ -1,0 +1,31 @@
+#Get all roles: GET /role
+curl --request GET \
+  --url http://localhost/api/role
+
+#Get one role: GET /role/{id}
+curl --request GET \
+  --url http://localhost/api/role/1
+
+#Create role: POST /role
+curl --request POST \
+  --url http://localhost/api/role \
+  --header 'content-type: application/json' \
+  --data '{
+	"name": "Admin"
+}'
+
+#Update role: PUT /role/{id}
+curl --request PUT \
+  --url http://localhost/api/role/1 \
+  --header 'content-type: application/json' \
+  --data '{
+	"name": "User"
+}'
+
+#Delete role: DELETE /role/{id}
+curl --request DELETE \
+  --url http://localhost/api/role/1
+
+#Role autocomplete
+curl --request GET \
+  --url 'http://localhost/api/role/autocomplete?input=com&limit=100'

@@ -1,0 +1,124 @@
+version: "3.3"
+services:
+  www:
+    image: code.milivojeivic.com/nginx
+    restart: always
+    volumes:
+      - ./docker/etc/www/nginx.conf:/etc/nginx/nginx.conf
+      - ./docker/etc/www/conf.d/:/etc/nginx/conf.d/
+      - ./docker/var/logs/www/:/var/log/nginx/
+      - .:/api
+    ports:
+      - "80:80"
+    networks:
+      - ala
+    depends_on:
+      - php
+  php:
+    image: code.milivojeivic.com/php-fpm:latest
+    restart: always
+    entrypoint: /api/docker/php-entrypoint.sh
+    volumes:
+      - ./docker/etc/php-fpm/cli/php.ini:/etc/php/7.2/cli/php.ini
+      - ./docker/etc/php-fpm/fpm/php.ini:/etc/php/7.2/fpm/php.ini
+      - ./docker/etc/php-fpm/fpm/pool.d/www.conf:/etc/php/7.2/fpm/pool.d/www.conf
+      - ./docker/etc/php-fpm/fpm/php-fpm.conf:/etc/php/7.2/fpm/php-fpm.conf
+      - ./docker/etc/php-fpm/ImageMagick/policy.xml:/etc/ImageMagick-6/policy.xml
+      - ./docker/var/logs/php-fpm:/var/log/fpm
+      - .:/api
+      - file-upload:/upload
+      - composer-global:/root/.composer/
+    networks:
+      - ala
+    stdin_open: true
+    tty: true
+    depends_on:
+      - pgsql
+      - redis
+    shm_size: 256M
+  pgsql:
+    image: postgres:11.1
+    restart: always
+    environment:
+      POSTGRES_DB: ala
+      POSTGRES_USER: ala
+      POSTGRES_PASSWORD: dev
+    volumes:
+        - ./docker/init/pgsql/initdb.d/:/docker-entrypoint-initdb.d/
+    ports:
+      - "5432:5432"
+    networks:
+      - ala
+  redis:
+    image: code.milivojeivic.com/redis:latest
+    restart: always
+    # command: redis-server --requirepass dev
+    command: redis-server
+    volumes:
+      - redis-storage:/data
+    ports:
+      - "6379:6379"
+    networks:
+      - ala
+  adminer:
+    image: code.milivojeivic.com/adminer
+    restart: always
+    ports:
+      - 8081:8080
+    networks:
+      - ala
+    depends_on:
+        - pgsql
+  rebrow:
+    image: marian/rebrow
+    restart: always
+    ports:
+      - 8082:5001
+    links:
+      - redis:redis
+    environment:
+      SECRET_KEY: dev
+    networks:
+      - ala
+    depends_on:
+        - redis
+  composer:
+    restart: 'no'
+    build: ./docker/builds/composer/
+    volumes:
+        - .:/app
+        - composer-global:/root/.composer/
+    networks:
+      - ala
+    depends_on:
+        - php
+  lumen:
+    restart: 'no'
+    build: ./docker/builds/lumen/
+    volumes:
+      - ./docker/etc/php-fpm/ImageMagick/policy.xml:/etc/ImageMagick-6/policy.xml
+      - .:/app
+      - composer-global:/root/.composer/
+    networks:
+      - ala
+    depends_on:
+      - php
+  artisan:
+    restart: 'no'
+    build: ./docker/builds/artisan/
+    volumes:
+      - ./docker/etc/php-fpm/ImageMagick/policy.xml:/etc/ImageMagick-6/policy.xml
+      - .:/app
+    networks:
+      - ala
+    depends_on:
+      - php
+networks:
+  ala:
+volumes:
+  file-upload:
+    driver: local
+  redis-storage:
+    driver: local
+  composer-global:
+    driver: local

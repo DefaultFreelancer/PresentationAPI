@@ -1,0 +1,7 @@
+# Get one pattern
+curl -X GET \
+  http://localhost/api/root/pattern/1
+
+# Get all patterns
+curl -X GET \
+  http://localhost/api/root/pattern

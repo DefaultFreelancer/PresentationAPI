@@ -1,0 +1,19 @@
+#Get All Word Activities: GET /api/word/{wordId}/activity
+curl --request GET \
+  --url http://localhost/api/word/9/activity
+
+#Create Word Activity: POST /api/word/{wordId}/activity
+curl --request POST \
+  --url http://localhost/api/word/9/activity \
+  --header 'content-type: application/json' \
+  --data '{\n	"content": "test"\n}'
+
+#Update Word Activity: PUT /word/{wordId}/activity/{wordActivityId}
+curl --request PUT \
+  --url http://localhost/api/word/10/activity/16 \
+  --header 'content-type: application/json' \
+  --data '{\n	"content": "test123"\n}'
+
+#Delete Word Activity: DELETE /word/{wordId}/activity/{wordActivityId}
+curl --request DELETE \
+  --url http://localhost/api/word/10/activity/16

@@ -1,0 +1,7 @@
+# Get one class
+curl -X GET \
+  http://localhost/api/root/class/1
+
+# Get all classes
+curl -X GET \
+  http://localhost/api/root/class

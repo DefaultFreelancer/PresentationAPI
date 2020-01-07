@@ -1,0 +1,34 @@
+#Get options
+curl -X GET http://localhost/api/word/table/options 
+
+#Get Filters
+curl -X GET http://localhost/api/word/table/filters
+
+#Get Words
+curl -X POST \
+  http://localhost/api/word/table/search 
+  -d '{
+  "columns": [
+    "id",
+    "text",
+    "root",
+    "type",
+    "createdAt",
+    "updatedAt"
+  ],
+  "order": {
+    "column":"id",
+    "type":"DESC"
+  },
+  "filters": {
+        "root": [
+            98
+        ],
+        "pattern": [
+            
+        ],
+        "search": ""
+    },
+  "limit": 2,
+  "offset": 0
+}'

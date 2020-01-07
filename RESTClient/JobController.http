@@ -1,0 +1,51 @@
+#Flat list of all the Jobs: GET /api/job
+curl -X GET \
+  http://localhost/api/job
+
+#Add a Job: POST /api/job
+curl -X POST \
+  -d '{
+	"name":"name",
+	"parent":{
+		"id": 2
+	},
+	"user":{
+		"id":1
+	},
+	"reviewThreshold":0,
+	"strictDown":true,
+	"strictUp":true,
+	"displayVertical":true,
+	"displayOpen":true
+}'
+
+#Get single Job: GET /api/job/{jobId}
+curl -X GET \
+  http://localhost/api/job/{jobId}
+
+#Update single Job: PUT /api/job/{jobId}
+curl -X PUT \
+  http://localhost/api/job/{jobId} \
+  -d '{
+	{
+	"name":"name",
+	"parent":{
+		"id": 2
+	},
+	"user":{
+		"id":1
+	},
+	"reviewThreshold":0,
+	"strictDown":true,
+	"strictUp":true,
+	"displayVertical":true,
+	"displayOpen":true
+}'
+
+#Delete single Job: DELETE /api/job/{jobId}
+curl -X DELETE \
+  http://localhost/api/job/13
+
+#Job autocomplete
+curl --request GET \
+  --url 'http://localhost/api/job/autocomplete?input=a&limit=100'

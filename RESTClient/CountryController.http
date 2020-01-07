@@ -1,0 +1,3 @@
+curl --request GET \
+  --url http://localhost/api/country \
+  --header 'content-type: application/json'

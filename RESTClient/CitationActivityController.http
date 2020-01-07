@@ -1,0 +1,23 @@
+#Get All Citation Activities: GET /api/word/{wordId}/citation/{citationId}/activity
+curl --request GET \
+  --url http://localhost/api/word/3/citation/4/activity
+
+#Create Citation Activity: POST /api/word/{wordId}/citation/{citationId}/activity
+curl --request POST \
+  --url http://localhost/api/word/3/citation/4/activity \
+  --header 'content-type: application/json' \
+  --data '{
+	"content": "test"
+}'
+
+#Update Citation Activity: PUT /api/word/{wordId}/citation/{citationId}/activity/{citationActivityId}
+curl --request PUT \
+  --url http://localhost/api/word/3/citation/4/activity/2 \
+  --header 'content-type: application/json' \
+  --data '{
+	"content": "test1234"
+}'
+
+#Delete Citation Activity: DELETE /api/word/{wordId}/citation/{citationId}/activity/{citationActivityId}
+curl --request DELETE \
+  --url http://localhost/api/word/3/citation/4/activity/2

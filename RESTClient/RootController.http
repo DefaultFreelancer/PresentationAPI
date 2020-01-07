@@ -1,0 +1,57 @@
+#List all the roots: GET /root
+
+curl -X GET \
+  http://localhost/api/root
+
+#Add new root: POST /root
+
+curl -X POST \
+  http://localhost/api/root \
+  -d '{
+	"root":"root",
+	"class": {"id": 2},
+	"pattern": {"id": 2},
+
+  #optional
+  "status":{"id":1} 
+}'
+
+#Get single root: GET /root/{rootId}
+
+curl -X GET \
+  http://localhost/api/root/{rootId}
+
+
+#Get status options: GET /root/options
+curl -X GET \
+  http://localhost/api/root/options
+
+
+#Delete root: DELETE /root/{rootId}
+
+curl -X DELETE \
+  http://localhost/api/root/{rootId}
+
+#Update root: PUT /root/{rootId}
+
+curl -X PUT \
+  http://localhost/api/root/{rootId}
+  -d '{
+	"root":"root",
+   "class": {"id": 2},
+	"pattern": {"id": 2},
+
+  #optional
+  "status":{"id":1} 
+}'
+
+#Bulk delete roots
+curl -X DELETE \
+  http://localhost/api/root/bulk
+  -d '{
+	[1, 2, 3]
+}'
+
+#Root autocomplete
+curl --request GET \
+  --url 'http://localhost/api/root/autocomplete?input=a&limit=100'

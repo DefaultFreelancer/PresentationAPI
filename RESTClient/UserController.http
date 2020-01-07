@@ -1,0 +1,57 @@
+#List all users: GET /user
+curl --request GET \
+  --url http://localhost/api/user
+
+#Get single user: GET /user/{id}
+curl --request GET \
+  --url http://localhost/api/user/1
+
+#Create new user: POST /user
+curl --request POST \
+  --url http://localhost/api/user \
+  --header 'content-type: application/json' \
+  --data '{
+	"name": "test",
+	"email": "test@test.com",
+	"password": "123456",
+	"phoneNumber": "123456",
+	"description": "Test Description",
+	"status": 1,
+	"country": {"id": 5},
+	"institution": {"id": 4},
+	"roles": [
+		{"id": 3},
+		{"id": 2}
+	]
+
+}'
+
+#Update user: PUT /user/{id}
+curl --request PUT \
+  --url http://localhost/api/user/101 \
+  --header 'content-type: application/json' \
+  --data '{
+	"name": "test123",
+	"email": "test123@test.com",
+	"password": "1234567",
+	"phoneNumber": "0123456",
+	"description": "Test Description Test",
+	"status": 3,
+	"country": {"id": 3},
+	"institution": {"id": 6},
+	"roles": [
+		{"id": 1},
+		{"id": 3}
+	]
+
+}'
+
+#Delete user: DELETE /user/{id}
+curl --request DELETE \
+  --url http://localhost/api/user/3
+
+#User autocomplete
+curl --request GET \
+  --url 'http://localhost/api/user/autocomplete?input=a&limit=50'
+
+

@@ -1,0 +1,24 @@
+#Upload file: POST /files
+curl --request POST \
+  --url http://localhost/api/files \
+  --header 'content-type: multipart/form-data; boundary=---011000010111000001101001' \
+  --form file=
+
+#Download file: GET /files/{name}
+curl --request GET \
+  --url http://localhost/api/files/9297dc5265051a38f1dfed56cda346df532f36ab
+
+#Get all file objects from database: GET /files
+curl --request GET \
+  --url http://localhost/api/files
+
+#Update file: PATCH /files/{name}
+curl --request PATCH \
+  --url http://localhost/api/files/9297dc5265051a38f1dfed56cda346df532f36ab \
+  --header 'content-type: application/json' \
+  --data '{
+	"label": "test123"
+}'
+#Delete file: DELETE /files/{name}
+curl --request DELETE \
+  --url http://localhost/api/files/680e45a8579f9b05c4872fa190612c57c3b92473

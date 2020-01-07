@@ -1,0 +1,76 @@
+# Get all citations: GET /word/{wordId}/citation 
+curl --request GET \
+  --url http://localhost/api/word/{wordId}/citation \
+  --header 'content-type: application/json'
+
+# Get specific citation: GET /word/{wordId}/citation/{id} 
+curl --request GET \
+  --url http://localhost/api/word/{wordId}/citation/{id} \
+  --header 'content-type: application/json'
+
+# Get /word/{wordId:[0-9]+}/citation/options
+curl --request GET \
+  --url http://localhost/api/word/{wordId:[0-9]+}/citation/options \
+  --header 'content-type: application/json'
+
+# Delete citation: DELETE /word/{wordId}/citation/{id}
+curl --request DELETE \
+  --url http://localhost/api/word/{wordId}/citation/{id} \
+  --header 'content-type: application/json' \
+
+# Create Citation example: POST /word/{wordId}/citation
+curl --request POST \
+    --url http://localhost/api/word/{wordId}/citation \
+    --header 'content-type: application/json' \
+    --data '{
+        "word": {"id":1},
+        "citation": "Test Citation",
+        "scientificDomain": [{"id":1},{"id":2},{"id":3}],
+        "source": {"id":1},
+        "era": {"id":1},
+        "nounNature": [{"id":1},{"id":2},{"id":3}],
+        "bibliographicInfo": "Test Biliographic Info",
+        "meaning": "Meaning string test",
+        "miItem": 3,
+        "miPage": 2,
+        "miReference": {"test":"test json field"},
+
+        # Non required
+        "approximate": {"id":1},
+        "gregorianDateFrom": "2019-05-09",
+        "gregorianDateTo": "2019-05-09",
+        "hijriDateFrom": "2019-05-09",
+        "hijriDateTo": "2019-05-09",
+        "imageSrc": "path/to/image.png",
+        "viewHref": "link/path",
+        "status":{"id":1} 
+
+    }'
+
+# Update Citation example: PUT /word/{wordId}/citation/{id}
+curl --request PUT \
+    --url http://localhost/api/word/{wordId}/citation/{id} \
+    --header 'content-type: application/json' \
+    --data '{
+        "word": {"id":1},
+        "citation": "Test Citation",
+        "scientificDomain": [{"id":1},{"id":2},{"id":3}],
+        "source": {"id":1},
+        "era": {"id":1},
+        "nounNature": [{"id":1},{"id":2},{"id":3}],
+        "bibliographicInfo": "Test Biliographic Info",
+        "meaning": "Meaning string test",
+        "miItem": 3,
+        "miPage": 2,
+        "miReference": {"test":"test json field"},
+
+        # Non required
+        "approximate": {"id":1},
+        "gregorianDateFrom": "2019-05-09",
+        "gregorianDateTo": "2019-05-09",
+        "hijriDateFrom": "2019-05-09",
+        "hijriDateTo": "2019-05-09",
+        "imageSrc": "path/to/image.png",
+        "viewHref": "link/path",
+        "status":{"id":1}
+    }'
